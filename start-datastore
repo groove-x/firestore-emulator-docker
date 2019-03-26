@@ -1,16 +1,5 @@
 #!/usr/bin/env bash
 
-# Check user environment variable
-if [[ -z "${DATASTORE_PROJECT_ID}" ]]; then
-  echo "Missing DATASTORE_PROJECT_ID environment variable" >&2
-  exit 1
-fi
-
-if [[ -z "${DATASTORE_LISTEN_ADDRESS}" ]]; then
-  echo "Missing DATASTORE_LISTEN_ADDRESS environment variable" >&2
-  exit 1
-fi
-
 options=${options:1}
 # Check for datastore options
 while [ ! $# -eq 0 ]
@@ -37,10 +26,10 @@ do
 done
 
 # Config gcloud project
-gcloud config set project ${DATASTORE_PROJECT_ID}
+gcloud config set project emulator
 
 # Start emulator
 gcloud beta emulators datastore start \
   --data-dir=/opt/data \
-  --host-port=${DATASTORE_LISTEN_ADDRESS} \
+  --host-port=0.0.0.0:8081 \
   ${options}

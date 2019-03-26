@@ -2,19 +2,12 @@
 
 A [Google Cloud Datastore Emulator](https://cloud.google.com/datastore/docs/tools/datastore-emulator/) container image. The image is meant to be used for creating an standalone emulator for testing.
 
-## Environment
-
-The following environment variables must be set:
-
-- `DATASTORE_LISTEN_ADDRESS`: The address should refer to a listen address, meaning that `0.0.0.0` can be used. The address must use the syntax `HOST:PORT`, for example `0.0.0.0:8081`. The container must expose the port used by the Datastore emulator.
-- `DATASTORE_PROJECT_ID`: The ID of the Google Cloud project for the emulator.
-
 ## Connect application with the emulator
 
 The following environment variables need to be set so your application connects to the emulator instead of the production Cloud Datastore environment:
 
-- `DATASTORE_EMULATOR_HOST`: The listen address used by the emulator.
-- `DATASTORE_PROJECT_ID`: The ID of the Google Cloud project used by the emulator.
+- `DATASTORE_EMULATOR_HOST=localhost:8081
+- `DATASTORE_PROJECT_ID=emulator
 
 ## Custom commands
 
@@ -42,16 +35,11 @@ The easiest way to create an emulator with this image is by using [Docker Compos
 ```YAML
 version: "2"
 
-services:
-  datastore:
-    image: singularities/datastore-emulator
-    environment:
-      - DATASTORE_PROJECT_ID=project-test
-      - DATASTORE_LISTEN_ADDRESS=0.0.0.0:8081
-    ports:
-      - "8081:8081"
+jobs:
+  build:
+    docker:
+    - image: groovex/datastore-emulator
 ```
-
 ### Persistence
 
 The image has a volume mounted at `/opt/data`. To maintain states between restarts, mount a volume at this location.
