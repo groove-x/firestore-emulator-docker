@@ -6,8 +6,8 @@ A [Google Cloud Datastore Emulator](https://cloud.google.com/datastore/docs/tool
 
 The following environment variables need to be set so your application connects to the emulator instead of the production Cloud Datastore environment:
 
-- `DATASTORE_EMULATOR_HOST=localhost:8081
-- `DATASTORE_PROJECT_ID=emulator
+- `DATASTORE_EMULATOR_HOST=localhost:8081`
+- `DATASTORE_PROJECT_ID=emulator`
 
 ## Custom commands
 
