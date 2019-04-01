@@ -9,28 +9,15 @@ The following environment variables need to be set so your application connects 
 - `DATASTORE_EMULATOR_HOST=localhost:8081`
 - `DATASTORE_PROJECT_ID=emulator`
 
-## Custom commands
-
-This image contains a script named `start-datastore` (included in the PATH). This script is used to initialize the Datastore emulator.
-
-### Starting an emulator
-
-By default, the following command is called:
+## Starting an emulator with docker
 
 ```sh
-start-datastore
-```
-### Starting an emulator with options
-
-This image comes with the following options: `--no-store-on-disk` and `--consistency`. Check [Datastore Emulator Start](https://cloud.google.com/sdk/gcloud/reference/beta/emulators/datastore/start). `--legacy`, `--data-dir` and `--host-port` are not supported by this image.
-
-```sh
-start-datastore --no-store-on-disk --consistency=1.0
+docker run -p 8081:8081 groovex/datastore-emulator:latest
 ```
 
-## Creating a Datastore emulator with Docker Compose
+## Creating a Datastore emulator with Circle CI
 
-The easiest way to create an emulator with this image is by using [Docker Compose](https://docs.docker.com/compose). The following snippet can be used as a `docker-compose.yml` for a datastore emulator:
+The easiest way to create an emulator with this image is by using Circle CI. The following snippet can be used as a `.circle/config.yml` for a datastore emulator:
 
 ```YAML
 version: "2"
@@ -40,6 +27,3 @@ jobs:
     docker:
     - image: groovex/datastore-emulator
 ```
-### Persistence
-
-The image has a volume mounted at `/opt/data`. To maintain states between restarts, mount a volume at this location.
