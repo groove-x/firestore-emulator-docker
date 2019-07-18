@@ -1,0 +1,8 @@
+#!/usr/bin/env bash
+
+# Config gcloud project
+gcloud config set project emulator
+
+# Start emulator
+#gcloud beta emulators firestore start
+/google-cloud-sdk/platform/cloud-firestore-emulator/cloud_firestore_emulator start --host=0.0.0.0 --port=8082

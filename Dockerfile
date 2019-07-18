@@ -3,17 +3,14 @@ ARG GCLOUD_SDK_VERSION=alpine
 
 # Use google cloud sdk
 FROM google/cloud-sdk:$GCLOUD_SDK_VERSION
-MAINTAINER Singularities
+MAINTAINER groove-x
 
-# Install Java 8 for Datastore emulator
+# Install Java 8 for Firestore emulator
 RUN apk --update add openjdk8-jre
-RUN gcloud components install cloud-datastore-emulator beta --quiet
+RUN gcloud components install cloud-firestore-emulator beta --quiet
 
-# Volume to persist Datastore data
-VOLUME /opt/data
+COPY start-firestore .
 
-COPY start-datastore .
+EXPOSE 8082
 
-EXPOSE 8081
-
-ENTRYPOINT ["./start-datastore"]
+ENTRYPOINT ["./start-firestore"]
