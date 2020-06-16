@@ -26,3 +26,11 @@ jobs:
     docker:
     - image: groovex/firestore-emulator
 ```
+
+# For contributor
+
+build container locally:
+
+```
+docker build . -t groovex/firestore-emulator:latest --pull
+```
