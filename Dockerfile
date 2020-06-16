@@ -6,7 +6,7 @@ FROM google/cloud-sdk:$GCLOUD_SDK_VERSION
 MAINTAINER groove-x
 
 # Install Java 8 for Firestore emulator
-RUN apk --update add openjdk8-jre
+RUN apk --update add openjdk8-jre-base
 RUN gcloud components install cloud-firestore-emulator beta --quiet
 
 COPY start-firestore .
